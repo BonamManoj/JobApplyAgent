@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Application Paste Assistant — Local Test Form</title>
+    <style>
+      body { max-width: 760px; margin: 30px auto; padding: 0 20px 60px; font: 15px/1.5 system-ui, sans-serif; color: #172033; }
+      h1 { margin-bottom: 5px; }
+      .notice { padding: 10px 12px; color: #2457d6; background: #eef4ff; border-radius: 8px; }
+      fieldset { display: grid; gap: 13px; margin: 20px 0; padding: 18px; border: 1px solid #ccd5e1; border-radius: 10px; }
+      label { display: grid; gap: 5px; }
+      input, textarea, select { padding: 9px; font: inherit; border: 1px solid #aeb9c8; border-radius: 6px; }
+      .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+      .radio-row { display: flex; gap: 20px; }
+      .radio-row label { display: flex; align-items: center; gap: 6px; }
+    </style>
+  </head>
+  <body>
+    <h1>Local job application test</h1>
+    <p class="notice">Safe test page: this form has no submit button and sends nothing anywhere.</p>
+
+    <form>
+      <fieldset>
+        <legend>Personal information</legend>
+        <div class="row">
+          <label for="first-name">First name<input id="first-name" name="first_name" autocomplete="given-name" required></label>
+          <label for="last-name">Last name<input id="last-name" name="last_name" autocomplete="family-name" required></label>
+        </div>
+        <label>Email address<input name="candidate_email" type="email" autocomplete="email" required></label>
+        <label>Mobile number<input name="mobile" type="tel" autocomplete="tel"></label>
+        <label>Street address<input name="street_address" autocomplete="street-address"></label>
+        <div class="row">
+          <label>City<input name="city" autocomplete="address-level2"></label>
+          <label>State / Province<input name="state" autocomplete="address-level1"></label>
+        </div>
+        <label>LinkedIn profile URL<input name="linkedin_profile" type="url"></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Employment history</legend>
+        <label>Company name<input name="company_1"></label>
+        <label>Job title<input name="job_title_1"></label>
+        <label>Company name<input name="company_2"></label>
+        <label>Job title<input name="job_title_2"></label>
+        <label>Years of experience<input name="years_of_experience" type="number"></label>
+        <label>Notice period<input name="notice_period"></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Eligibility</legend>
+        <label>Are you authorized to work in this country?
+          <select name="work_authorization">
+            <option value="">Choose</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </label>
+        <fieldset>
+          <legend>Will you now or in the future require visa sponsorship?</legend>
+          <div class="radio-row">
+            <label><input type="radio" name="sponsorship" value="yes"> Yes</label>
+            <label><input type="radio" name="sponsorship" value="no"> No</label>
+          </div>
+        </fieldset>
+        <label>Are you willing to relocate?
+          <select name="relocation">
+            <option value="">Choose</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Education and documents</legend>
+        <label>School / University<input name="university"></label>
+        <label>Degree<input name="degree"></label>
+        <label>Graduation year<input name="graduation_year" type="number"></label>
+        <label>Upload resume or CV<input name="resume" type="file" accept=".pdf,.doc,.docx"></label>
+        <label>Cover letter<textarea name="cover_letter" rows="5"></textarea></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Gender (optional)</legend>
+        <div class="radio-row">
+          <label><input type="radio" name="gender" value="female"> Female</label>
+          <label><input type="radio" name="gender" value="male"> Male</label>
+          <label><input type="radio" name="gender" value="decline"> Prefer not to answer</label>
+        </div>
+      </fieldset>
+    </form>
+  </body>
+</html>

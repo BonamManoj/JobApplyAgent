@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Application Paste Assistant",
+  "version": "0.6.0",
+  "description": "Detect job application fields and fill them with locally saved profile data.",
+  "permissions": [
+    "activeTab",
+    "sidePanel",
+    "storage",
+    "tabs",
+    "unlimitedStorage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  "action": {
+    "default_title": "Open Application Paste Assistant"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["profile-values.js", "content-script.js", "application-actions.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

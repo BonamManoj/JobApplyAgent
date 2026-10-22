@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Application Paste Assistant</title>
+    <link rel="stylesheet" href="sidepanel.css">
+  </head>
+  <body>
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">Application assistant</p>
+        <h1>Paste what this page needs</h1>
+      </div>
+      <span class="status-dot" aria-hidden="true"></span>
+    </header>
+
+    <div class="profile-bar">
+      <label for="profile-select">Active profile</label>
+      <div class="profile-controls">
+        <select id="profile-select" aria-label="Active profile"></select>
+        <button id="add-profile" class="button secondary" type="button">+ Add profile</button>
+      </div>
+    </div>
+
+    <nav class="tabs" aria-label="Sections">
+      <button class="tab active" type="button" data-tab="detected">Detected</button>
+      <button class="tab" type="button" data-tab="profile">My profile</button>
+    </nav>
+
+    <main>
+      <section id="detected-panel" class="panel active" aria-labelledby="detected-tab">
+        <div class="toolbar">
+          <div>
+            <h2>Fields on this page</h2>
+            <p id="scan-summary" class="muted">Open an application form, then scan it.</p>
+          </div>
+          <button id="scan-button" class="button secondary" type="button">Scan page</button>
+        </div>
+
+        <div id="message" class="message" hidden></div>
+        <button id="fill-experiences-button" class="button secondary experience-action" type="button" hidden>Fill saved work experience (add missing entries)</button>
+        <div id="detected-fields" class="field-list"></div>
+
+        <div id="empty-state" class="empty-state">
+          <div class="empty-icon" aria-hidden="true">⌁</div>
+          <h3>No scan yet</h3>
+          <p>We’ll find visible text fields, dropdowns and written-answer boxes.</p>
+        </div>
+
+        <button id="fill-all-button" class="button primary full-width" type="button" hidden>
+          Fill all recognized fields
+        </button>
+      </section>
+
+      <section id="profile-panel" class="panel" aria-labelledby="profile-tab">
+        <div class="section-heading">
+          <h2>Your saved information</h2>
+          <p>Saved only in this Chrome profile. Leave anything you don’t want to store blank.</p>
+        </div>
+
+        <form id="profile-form">
+          <fieldset>
+            <legend>Profile</legend>
+            <label>Profile name<input name="profileName" placeholder="e.g. AI Engineer"></label>
+            <p class="privacy-note">Profiles are stored locally and survive extension reloads. Use Reload on chrome://extensions when updating.</p>
+          </fieldset>
+
+          <fieldset>
+            <legend>Personal</legend>
+            <div class="grid two-column">
+              <label>Given name<input name="firstName" autocomplete="given-name"></label>
+              <label>Middle name<input name="middleName" autocomplete="additional-name"></label>
+            </div>
+            <label>Family name<input name="lastName" autocomplete="family-name"></label>
+            <label>Full name<input name="fullName" autocomplete="name"></label>
+            <label>Email<input name="email" type="email" autocomplete="email"></label>
+            <label>Phone<input name="phone" type="tel" autocomplete="tel"></label>
+            <div class="grid two-column">
+              <label>Phone type
+                <select name="phoneType">
+                  <option value="">Not set</option>
+                  <option value="Mobile">Mobile</option>
+                  <option value="Home">Home</option>
+                  <option value="Work">Work</option>
+                </select>
+              </label>
+              <label>Country phone code<input name="phoneCountryCode" placeholder="e.g. India (+91)"></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Location and links</legend>
+            <label>Street address<input name="address" autocomplete="street-address"></label>
+            <div class="grid two-column">
+              <label>City<input name="city" autocomplete="address-level2"></label>
+              <label>State<input name="state" autocomplete="address-level1"></label>
+            </div>
+            <div class="grid two-column">
+              <label>Country<input name="country" autocomplete="country-name"></label>
+              <label>PIN / postal code<input name="pincode" autocomplete="postal-code"></label>
+            </div>
+            <label>LinkedIn URL<input name="linkedIn" type="url"></label>
+            <label>GitHub URL<input name="github" type="url"></label>
+            <label>Portfolio URL<input name="portfolio" type="url"></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Work</legend>
+            <div id="work-experience-list" class="experience-list"></div>
+            <button id="add-experience" class="button secondary" type="button">+ Add company</button>
+            <div class="grid two-column">
+              <label>Total experience<input name="totalExperience" placeholder="e.g. 4 years"></label>
+              <label>Notice period<input name="noticePeriod" placeholder="e.g. 30 days"></label>
+            </div>
+            <div class="grid two-column">
+              <label>Current CTC<input name="currentCtc"></label>
+              <label>Expected CTC<input name="expectedCtc"></label>
+            </div>
+            <div class="grid two-column">
+              <label>Authorized to work?
+                <select name="workAuthorized">
+                  <option value="">Not set</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </label>
+              <label>Need visa sponsorship?
+                <select name="needsSponsorship">
+                  <option value="">Not set</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </label>
+            </div>
+            <label>Willing to relocate?
+              <select name="willingToRelocate">
+                <option value="">Not set</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </label>
+            <label>How did you hear about the company?<input name="howDidYouHear" placeholder="e.g. LinkedIn"></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Education</legend>
+            <label>School / university<input name="school"></label>
+            <div class="grid two-column">
+              <label>Degree<input name="degree"></label>
+              <label>Field of study<input name="fieldOfStudy"></label>
+            </div>
+            <label>Technical skills<textarea name="skills" rows="4"></textarea></label>
+            <div class="grid two-column">
+              <label>Graduation month<input name="gradMonth" inputmode="numeric" placeholder="e.g. 05"></label>
+              <label>Graduation year<input name="gradYear" inputmode="numeric"></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Common answers</legend>
+            <label>Professional summary<textarea name="summary" rows="4"></textarea></label>
+            <label>Why are you interested?<textarea name="whyInterested" rows="4"></textarea></label>
+            <label>Cover letter<textarea name="coverLetter" rows="6"></textarea></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Resume and optional questions</legend>
+            <label>Resume file
+              <input id="resume-file" type="file" accept=".pdf,.doc,.docx">
+            </label>
+            <div class="resume-row">
+              <span id="resume-info" class="muted">No resume saved.</span>
+              <button id="remove-resume" class="text-button" type="button" hidden>Remove</button>
+            </div>
+            <label class="checkbox-label">
+              <input id="eeo-decline" name="eeoDecline" type="checkbox">
+              Use “Prefer not to answer” for recognized EEO questions
+            </label>
+            <p class="privacy-note">Your profile and resume stay in this Chrome profile. The extension never submits an application.</p>
+          </fieldset>
+
+          <div class="sticky-actions">
+            <span id="save-status" class="muted" role="status"></span>
+            <button class="button primary" type="submit">Save profile</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <script src="default-profile.js"></script>
+    <script src="profile-values.js"></script>
+    <script src="sidepanel.js"></script>
+  </body>
+</html>

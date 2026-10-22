@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Application Paste Assistant — Workday Test</title>
+    <style>
+      body { max-width: 780px; margin: 28px auto; padding: 0 20px 60px; font: 15px/1.5 system-ui, sans-serif; color: #172033; }
+      .notice { padding: 11px 13px; color: #2457d6; background: #eef4ff; border-radius: 8px; }
+      section, fieldset { display: grid; gap: 13px; margin: 20px 0; padding: 18px; border: 1px solid #cbd5e1; border-radius: 10px; }
+      label { display: grid; gap: 5px; font-weight: 600; }
+      input, textarea, select, button.dropdown { padding: 9px; font: inherit; text-align: left; border: 1px solid #aeb9c8; border-radius: 6px; background: white; }
+      .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+      .dropdown-wrap { position: relative; display: grid; gap: 5px; }
+      [role="listbox"] { z-index: 3; margin: 0; padding: 5px; list-style: none; border: 1px solid #8290a3; border-radius: 6px; background: white; box-shadow: 0 6px 16px #0002; }
+      [role="option"] { padding: 8px; border-radius: 4px; cursor: pointer; }
+      [role="option"]:hover { background: #eef4ff; }
+      .checkbox { display: flex; grid-template-columns: none; align-items: center; gap: 8px; }
+      .checkbox input { width: auto; }
+    </style>
+  </head>
+  <body>
+    <h1>Workday-style local test</h1>
+    <p class="notice">This page simulates Workday controls. It has no account, network request, or submit button.</p>
+
+    <form data-automation-id="jobApplication">
+      <section data-automation-id="myInformationPage">
+        <h2>My Information</h2>
+
+        <div class="dropdown-wrap" data-automation-id="formField-country">
+          <label id="country-label">Country*</label>
+          <button class="dropdown" type="button" data-automation-id="countryDropdown" aria-labelledby="country-label" aria-haspopup="listbox" aria-controls="country-options">Select One</button>
+          <ul id="country-options" role="listbox" hidden>
+            <li role="option">India</li><li role="option">United Kingdom</li><li role="option">United States of America</li>
+          </ul>
+        </div>
+
+        <div class="row" data-automation-id="legalNameSection">
+          <label>First Name*<input data-automation-id="legalNameSection_firstName" required></label>
+          <label>Last Name*<input data-automation-id="legalNameSection_lastName" required></label>
+        </div>
+
+        <div data-automation-id="addressSection">
+          <label>Address Line 1*<input data-automation-id="addressSection_addressLine1" required></label>
+          <div class="row">
+            <label>City*<input data-automation-id="addressSection_city" required></label>
+            <label>Postal Code*<input data-automation-id="addressSection_postalCode" required></label>
+          </div>
+        </div>
+
+        <div class="row" data-automation-id="phoneSection">
+          <div class="dropdown-wrap">
+            <label id="phone-type-label">Phone Device Type*</label>
+            <button class="dropdown" type="button" data-automation-id="phone-device-type" aria-labelledby="phone-type-label" aria-haspopup="listbox" aria-controls="phone-type-options">Select One</button>
+            <ul id="phone-type-options" role="listbox" hidden><li role="option">Mobile</li><li role="option">Home</li><li role="option">Work</li></ul>
+          </div>
+          <label>Phone Number*<input type="tel" data-automation-id="phone-number" required></label>
+        </div>
+      </section>
+
+      <section data-automation-id="myExperiencePage">
+        <h2>My Experience</h2>
+        <fieldset data-automation-id="workExperience-1">
+          <legend>Work Experience 1</legend>
+          <label>Job Title*<input data-automation-id="jobTitle" required></label>
+          <label>Company*<input data-automation-id="company" required></label>
+          <label>Location<input data-automation-id="location"></label>
+          <div class="row">
+            <div data-automation-id="formField-startDate">
+              <label>Start month<input data-automation-id="dateSectionMonth-input" inputmode="numeric"></label>
+              <label>Start year<input data-automation-id="dateSectionYear-input" inputmode="numeric"></label>
+            </div>
+            <div data-automation-id="formField-endDate">
+              <label>End month<input data-automation-id="dateSectionMonth-input" inputmode="numeric"></label>
+              <label>End year<input data-automation-id="dateSectionYear-input" inputmode="numeric"></label>
+            </div>
+          </div>
+          <label class="checkbox"><input type="checkbox" data-automation-id="currentlyWorkHere"> I currently work here</label>
+          <label>Role description<textarea data-automation-id="description" rows="4"></textarea></label>
+        </fieldset>
+
+        <fieldset data-automation-id="education-1">
+          <legend>Education 1</legend>
+          <div class="dropdown-wrap" data-automation-id="formField-school">
+            <label for="school-search">School or University*</label>
+            <input id="school-search" data-automation-id="school" role="combobox" aria-controls="school-options" aria-autocomplete="list">
+            <ul id="school-options" role="listbox" hidden><li role="option">Indian Institute of Technology, Bhubaneswar</li><li role="option">Other</li></ul>
+          </div>
+          <div class="dropdown-wrap">
+            <label id="degree-label">Degree*</label>
+            <button class="dropdown" type="button" data-automation-id="degree" aria-labelledby="degree-label" aria-haspopup="listbox" aria-controls="degree-options">Select One</button>
+            <ul id="degree-options" role="listbox" hidden><li role="option">Bachelor of Technology (B.Tech)</li><li role="option">Bachelor's Degree</li><li role="option">Master's Degree</li></ul>
+          </div>
+          <label>Field of Study<input data-automation-id="fieldOfStudy"></label>
+          <div class="row" data-automation-id="formField-endDate">
+            <label>Graduation month<input data-automation-id="dateSectionMonth-input" inputmode="numeric"></label>
+            <label>Graduation year<input data-automation-id="dateSectionYear-input" inputmode="numeric"></label>
+          </div>
+        </fieldset>
+
+        <div data-automation-id="file-upload-drop-zone">
+          <label>Resume/CV<input type="file" data-automation-id="file-upload-input-ref" accept=".pdf,.doc,.docx"></label>
+        </div>
+      </section>
+
+      <section data-automation-id="applicationQuestionsPage">
+        <h2>Application Questions</h2>
+        <label>Are you legally authorized to work in this country?
+          <select><option value="">Select One</option><option value="yes">Yes</option><option value="no">No</option></select>
+        </label>
+        <label>Will you now or in the future require visa sponsorship?
+          <select><option value="">Select One</option><option value="yes">Yes</option><option value="no">No</option></select>
+        </label>
+      </section>
+    </form>
+
+    <script>
+      for (const button of document.querySelectorAll("button[aria-controls]")) {
+        const list = document.getElementById(button.getAttribute("aria-controls"));
+        button.addEventListener("click", () => { list.hidden = false; });
+        list.addEventListener("click", (event) => {
+          const option = event.target.closest("[role='option']");
+          if (!option) return;
+          button.textContent = option.textContent.trim();
+          button.dataset.selectedValue = option.textContent.trim();
+          list.hidden = true;
+        });
+      }
+
+      for (const input of document.querySelectorAll("input[role='combobox'][aria-controls]")) {
+        const list = document.getElementById(input.getAttribute("aria-controls"));
+        input.addEventListener("input", () => { list.hidden = false; });
+        list.addEventListener("click", (event) => {
+          const option = event.target.closest("[role='option']");
+          if (!option) return;
+          input.value = option.textContent.trim();
+          list.hidden = true;
+        });
+      }
+    </script>
+  </body>
+</html>
